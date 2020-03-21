@@ -32,12 +32,11 @@ public class MainActivity extends AppCompatActivity {
         // (activity_main.xml)
         // DrawerLayout allows interactive "drawer" views to be pulled out from edges of the window
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        //
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_contacts, R.id.nav_message)
                 .setDrawerLayout(drawer)
                 .build();
         // nav_host_fragment in content_main.xml

@@ -30,14 +30,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="si.uni_lj.fri.pbd.miniapp1.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_contacts"
+        android:name="si.uni_lj.fri.pbd.miniapp1.ui.contacts.ContactsFragment"
+        android:label="@string/menu_contacts"
+        tools:layout="@layout/fragment_contacts" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="si.uni_lj.fri.pbd.miniapp1.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_message"
+        android:name="si.uni_lj.fri.pbd.miniapp1.ui.message.MessageFragment"
+        android:label="@string/menu_message"
+        tools:layout="@layout/fragment_message" />
+
 </navigation>
