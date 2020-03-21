@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import si.uni_lj.fri.pbd.miniapp1.R;
 
 public class HomeFragment extends Fragment {
-
+/*
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,5 +31,12 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+ */
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

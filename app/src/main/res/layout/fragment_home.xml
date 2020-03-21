@@ -10,18 +10,19 @@
         android:id="@+id/imageView2"
         android:layout_width="240dp"
         android:layout_height="446dp"
-        android:layout_marginTop="10dp"
+        android:contentDescription="@string/uni_logo_description"
         android:src="@drawable/uni_logo"
         app:layout_constraintBottom_toTopOf="@+id/application_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/uni_logo_description" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/course_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/course_name"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/application_name"
@@ -33,7 +34,7 @@
         android:id="@+id/application_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="45dp"
         android:text="@string/application_name"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -28,15 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // sets a toolbar (app_bar_main.xml)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // todo: we don't need FAB
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         // (activity_main.xml)
         // DrawerLayout allows interactive "drawer" views to be pulled out from edges of the window
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
