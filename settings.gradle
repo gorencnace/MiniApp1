@@ -1,0 +1,2 @@
+rootProject.name='MiniApp1'
+include ':app'
