@@ -18,14 +18,17 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Configuration option for NavigationUI methods (for Toolbar)
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // sets a toolbar (app_bar_main.xml)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // todo: we don't need FAB
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        // (activity_main.xml)
+        // DrawerLayout allows interactive "drawer" views to be pulled out from edges of the window
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        //
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -42,11 +48,17 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
+        // nav_host_fragment in content_main.xml
+        // finds a NavController given the id of a View and its containing Activity
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        // sets up the ActionBar returned by AppCompactActivity (this activity) for use with a NavController
+        // AppBarConfiguration controls how the navigation button is displayed
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        // sets up a NavigationView for use with a NavController
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    // settings menu on the right
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -54,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // this methode is called whenever the user chooses to navigate UP within your application's
+    // activity hierarchy from the action bar (to handle left up button)
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
