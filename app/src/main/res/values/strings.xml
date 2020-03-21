@@ -14,9 +14,15 @@
 
     <string name="home_second">Home Second</string>
 
+    <!-- Home -->
     <string name="course_name">PBD2020</string>
     <string name="application_name">Android Mini App 1</string>
     <string name="uni_logo_description">UniLogo</string>
+
+    <!-- Message -->
+    <string name="txt_share">Share</string>
+    <string name="btn_email">SEND GROUP EMAIL</string>
+    <string name="btn_mms">SEND GROUP MMS</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="blank_fragment">THIS FRAGMENT IS BLANK...FOR NOW</string>
