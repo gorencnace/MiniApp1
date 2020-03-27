@@ -28,4 +28,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="blank_fragment">THIS FRAGMENT IS BLANK...FOR NOW</string>
+    <string name="contact_name">Example Name</string>
 </resources>
