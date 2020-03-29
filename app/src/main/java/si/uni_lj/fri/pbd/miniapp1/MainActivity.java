@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Contact> contactList;
 
+    private String key = "contacts";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
         if (!checkPermission()) {
             requestPermission();
         }
-        setContactList();
+
+        if (savedInstanceState == null || !savedInstanceState.containsKey(key)) {
+            setContactList();
+        } else {
+            contactList = savedInstanceState.getParcelableArrayList(key);
+        }
 
         setContentView(R.layout.activity_main);
         // sets a toolbar (app_bar_main.xml)
@@ -81,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(key, contactList);
+        super.onSaveInstanceState(outState);
+    }
+
     // settings menu on the right
     /*
     @Override
@@ -92,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     // this method is called whenever the user chooses to navigate UP within your application's
     // activity hierarchy from the action bar (to handle left up button)
-    // We also set profile photo here. Why? I tried to do this in onCreate an in onResume and
+    // We also set profile photo here. Why? I tried to do this in onCreate and in onResume and
     // it turns out that ImageView is not initialized there yet so I needed to find another
     // solution for this problem.
     @Override

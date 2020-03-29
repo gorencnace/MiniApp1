@@ -7,7 +7,10 @@
 
 package si.uni_lj.fri.pbd.miniapp1.ui.contacts;
 
-public class Contact {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Contact implements Parcelable {
     private long contactId;
     private String contactName;
     private String contactEmailAddress;
@@ -37,6 +40,10 @@ public class Contact {
         this.contactPhoneNumber = contactPhoneNumber;
     }
 
+    public void setContactState(boolean contactState) {
+        this.contactState = contactState;
+    }
+
     public String getContactName() {
         return contactName;
     }
@@ -53,6 +60,10 @@ public class Contact {
         return contactId;
     }
 
+    public boolean getContactState() {
+        return contactState;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -67,12 +78,41 @@ public class Contact {
         return builder.toString();
     }
 
-    public boolean getContactState() {
-        return contactState;
+    // this is needed for parcelable, generated with http://www.parcelabler.com/
+
+    protected Contact(Parcel in) {
+        contactId = in.readLong();
+        contactName = in.readString();
+        contactEmailAddress = in.readString();
+        contactPhoneNumber = in.readString();
+        contactState = in.readByte() != 0x00;
     }
 
-    public void setContactState(boolean contactState) {
-        this.contactState = contactState;
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(contactId);
+        dest.writeString(contactName);
+        dest.writeString(contactEmailAddress);
+        dest.writeString(contactPhoneNumber);
+        dest.writeByte((byte) (contactState ? 0x01 : 0x00));
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Contact> CREATOR = new Parcelable.Creator<Contact>() {
+        @Override
+        public Contact createFromParcel(Parcel in) {
+            return new Contact(in);
+        }
+
+        @Override
+        public Contact[] newArray(int size) {
+            return new Contact[size];
+        }
+    };
 }
 
