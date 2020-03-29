@@ -5,7 +5,7 @@
  * when user scrolls throw list of contacts, so we need to change view constantly with getView
  * method.
  *
- * For more info i suggest to check the link below.
+ * For more info I suggest to check the link below.
  *
  * Based on https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
  *
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import si.uni_lj.fri.pbd.miniapp1.R;
 
 public class ContactAdapter extends ArrayAdapter<Contact> {
+
     public ContactAdapter(@NonNull Context context, ArrayList<Contact> contactList) {
         super(context, 0, contactList);
     }

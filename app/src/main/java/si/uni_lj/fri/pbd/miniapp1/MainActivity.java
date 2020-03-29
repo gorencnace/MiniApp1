@@ -1,3 +1,10 @@
+/*
+ * MAIN ACTIVITY
+ *
+ * It's all downhill from here!
+ *
+ */
+
 package si.uni_lj.fri.pbd.miniapp1;
 
 import android.Manifest;
@@ -10,19 +17,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.util.LongSparseArray;
 import android.view.View;
-import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,10 +35,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-
 import si.uni_lj.fri.pbd.miniapp1.ui.contacts.Contact;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // permission checkup
         if (!checkPermission()) {
             requestPermission();
         }
-
+        // restores contactList if it was not initialized yet
         if (savedInstanceState == null || !savedInstanceState.containsKey(key)) {
             setContactList();
         } else {
@@ -67,12 +67,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        // sets a toolbar (app_bar_main.xml)
+
+        // sets a toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // (activity_main.xml)
         // DrawerLayout allows interactive "drawer" views to be pulled out from edges of the window
+        // sets a drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_contacts, R.id.nav_message)
                 .setDrawerLayout(drawer)
                 .build();
-        // nav_host_fragment in content_main.xml
         // finds a NavController given the id of a View and its containing Activity
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         // sets up the ActionBar returned by AppCompactActivity (this activity) for use with a NavController
@@ -91,20 +91,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    // saves a contactList on screen rotations (onDestroy)
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(key, contactList);
         super.onSaveInstanceState(outState);
     }
-
-    // settings menu on the right
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
 
     // this method is called whenever the user chooses to navigate UP within your application's
     // activity hierarchy from the action bar (to handle left up button)
@@ -122,10 +114,11 @@ public class MainActivity extends AppCompatActivity {
     /*
      *  PERMISSION CHECKUP
      *
-     *  base on https://www.androidauthority.com/send-sms-messages-app-development-856280/
+     *  based on https://www.androidauthority.com/send-sms-messages-app-development-856280/
      *
      */
 
+    // checks if permissions were already obtained
     public boolean checkPermission() {
         int ContactPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.READ_CONTACTS);
@@ -135,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 CameraPermissionResult == PackageManager.PERMISSION_GRANTED;
     }
 
+    // requests permission
     private void requestPermission() {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]
                 {
@@ -145,18 +139,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-                    boolean ReadContactsPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean CameraPermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (ReadContactsPermission && CameraPermission) {
-                        Toast.makeText(MainActivity.this, "Permission accepted", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
-                    }
-                    break;
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                boolean ReadContactsPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean CameraPermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                if (ReadContactsPermission && CameraPermission) {
+                    Toast.makeText(MainActivity.this, "Permission accepted", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
                 }
+            }
         }
     }
 
@@ -168,10 +160,10 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void setContactList() {
-        // from
+        // we use 2 arrays for extra speed
         this.contactList = new ArrayList<Contact>();
         LongSparseArray<Contact> array = new LongSparseArray<Contact>();
-
+        // cursor setup
         String[] projection = {
                 ContactsContract.Data.MIMETYPE,
                 ContactsContract.Data.CONTACT_ID,
@@ -185,38 +177,29 @@ public class MainActivity extends AppCompatActivity {
                 ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
         };
         String sortOrder = ContactsContract.Contacts.SORT_KEY_ALTERNATIVE;
-
-        //Uri uri = ContactsContract.CommonDataKinds.Contactables.CONTENT_URI;
+        // we could use Uri uri = ContactsContract.CommonDataKinds.Contactables.CONTENT_URI;
         Uri uri = ContactsContract.Data.CONTENT_URI;
-        // we could also use Uri uri = ContactsContract.Data.CONTENT_URI; <- did this
-
-        // ok, let's work...
         Cursor cursor = getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);
 
         final int mimeTypeIdx = cursor.getColumnIndex(ContactsContract.Data.MIMETYPE);
         final int idIdx = cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID);
         final int nameIdx = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
         final int dataIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Contactables.DATA);
-        final int typeIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Contactables.TYPE);
 
         while (cursor.moveToNext()) {
             long id = cursor.getLong(idIdx);
             Contact contact = array.get(id);
+            // creates contact if it is null
             if (contact == null) {
                 contact = new Contact();
-                contact.setContactId(id);
                 contact.setContactName(cursor.getString(nameIdx));
                 array.put(id, contact);
                 contactList.add(contact);
             }
-            int type = cursor.getInt(typeIdx);
-            Log.d("TYPE", String.valueOf(type));
             String data = cursor.getString(dataIdx);
-            Log.d("DATA", data);
             String mimeType = cursor.getString(mimeTypeIdx);
-            Log.d("MIME_TYPE", mimeType);
+            // gets email address or phone number based on mimeType (one of selectionArgs in cursor setup)
             if (mimeType.equals(ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)) {
-                // mimeType == ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
                 if (contact.getContactEmailAddress() == null) {
                     contact.setContactEmailAddress(data);
                 }
@@ -229,9 +212,11 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
     }
 
+    // used to pass data to fragments
     public ArrayList<Contact> getContactList() {
         return contactList;
     }
+
     /*
      * PROFILE PHOTO
      *
@@ -280,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
      * BITMAP <=> STRING CONVERSION
      *
      * The code below (2 methods) is taken from http://androidtrainningcenter.blogspot.com/2012/03/how-to-convert-string-to-bitmap-and.html
-     * We need it to put BitImage in SharedPreferences
      *
      */
 

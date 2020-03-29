@@ -1,7 +1,7 @@
 /*
  * CONTACT CUSTOM OBJECT
  *
- * Here we store basic of a contact
+ * Here we store basic info of a contact
  *
  */
 
@@ -11,7 +11,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Contact implements Parcelable {
-    private long contactId;
     private String contactName;
     private String contactEmailAddress;
     private String contactPhoneNumber;
@@ -22,10 +21,6 @@ public class Contact implements Parcelable {
         this.contactEmailAddress = null;
         this.contactPhoneNumber = null;
         this.contactState = false;
-    }
-
-    public void setContactId(long contactId) {
-        this.contactId = contactId;
     }
 
     public void setContactName(String contactName) {
@@ -56,10 +51,6 @@ public class Contact implements Parcelable {
         return contactPhoneNumber;
     }
 
-    public long getContactId() {
-        return contactId;
-    }
-
     public boolean getContactState() {
         return contactState;
     }
@@ -81,7 +72,6 @@ public class Contact implements Parcelable {
     // this is needed for parcelable, generated with http://www.parcelabler.com/
 
     protected Contact(Parcel in) {
-        contactId = in.readLong();
         contactName = in.readString();
         contactEmailAddress = in.readString();
         contactPhoneNumber = in.readString();
@@ -95,7 +85,6 @@ public class Contact implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(contactId);
         dest.writeString(contactName);
         dest.writeString(contactEmailAddress);
         dest.writeString(contactPhoneNumber);
