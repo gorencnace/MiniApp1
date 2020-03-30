@@ -1,6 +1,8 @@
 /*
  * HOME FRAGMENT
  *
+ * Nothing to see here.
+ *
  */
 
 package si.uni_lj.fri.pbd.miniapp1.ui.home;

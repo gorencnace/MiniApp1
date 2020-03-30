@@ -3,6 +3,8 @@
  *
  * It's all downhill from here!
  *
+ * Based on this helpful tutorial https://www.youtube.com/watch?v=dQw4w9WgXcQ
+ *
  */
 
 package si.uni_lj.fri.pbd.miniapp1;
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private static final int PERMISSION_REQUEST_CODE = 1;
-
+    // Mind that this ArrayList of contacts also stores the state of contact (if contact was
+    // selected for further use), because we don't have to store selected contacts separately.
     private ArrayList<Contact> contactList;
 
     private String key = "contacts";
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     /*
      *  PERMISSION CHECKUP
      *
-     *  based on https://www.androidauthority.com/send-sms-messages-app-development-856280/
+     *  Based on https://www.androidauthority.com/send-sms-messages-app-development-856280/
      *
      */
 
@@ -155,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     /*
      *  SETTING & GETTING CONTACT LIST
      *
-     *  based on https://stackoverflow.com/questions/26804387/android-fetch-all-contact-list-name-email-phone-takes-more-then-a-minute-for/26820544
+     *  Based on https://stackoverflow.com/questions/26804387/android-fetch-all-contact-list-name-email-phone-takes-more-then-a-minute-for/26820544
      *
      */
 

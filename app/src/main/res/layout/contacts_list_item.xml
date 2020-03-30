@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- I'm not sure if this belongs to trash or not so I'm just gonna leave it here... -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contacts_item"
     android:layout_width="match_parent"

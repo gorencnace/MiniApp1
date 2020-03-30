@@ -1,7 +1,9 @@
 /*
  * CONTACT FRAGMENT
  *
- * .xml for fragment is based on https://stackoverflow.com/questions/5939392/android-checkable-listview
+ * .xml for fragments (fragment_contacts, item_contact) is based on
+ * https://stackoverflow.com/questions/5939392/android-checkable-listview
+ *
  *
  */
 

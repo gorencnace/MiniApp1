@@ -2,7 +2,7 @@
  * CONTACT ADAPTER
  *
  * This is needed for showing contacts in ListView. Keep in mind that this view is recycled
- * when user scrolls throw list of contacts, so we need to change view constantly with getView
+ * when user scrolls through list of contacts, so we need to change view constantly with getView
  * method.
  *
  * For more info I suggest to check the link below.
@@ -42,7 +42,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         TextView contactName = (TextView) convertView.findViewById(R.id.contact_name);
         // Populate the data into the template view using the data object
         contactName.setText(contact.getContactName());
-        // We need to handle the state ob checkbox here because of the recycling nature of this View
+        // We need to handle the state of checkbox here because of the recycling nature of this View
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.contact_chackbox);
         checkBox.setChecked(contact.getContactState());
         // Return the completed view to render on screen
