@@ -1,0 +1,52 @@
+Mini App 1 Grading Rubric,,
+,"* Go through this list and perform every test mentioned in this grading rubric.
+* Select 1 or 0 from the dropdown menu in the Test Result column,
+   depending on the test result, positive or negative, respectively.
+* Add your comments in the respective section if you have any notes or doubts.
+
+Feel free to reach out to the TAs if you encounter problems with compiling and building the app
+but you are not sure if it's a code problem, or an issue with your own
+coding environment.",
+,,Test Result
+1,Does the app have one activity and three fragments?,1
+2,Is the main activity of type AppCompatActivity?,1
+3,Is the main activity using a layout file named activity_main.xml?,1
+4,Is the first fragment called HomeFragment?,1
+5,Is the second fragment called ContactsFragment?,1
+6,Is the third fragment called MessageFragment?,1
+7,Does the first fragment use a layout file called fragment_home.xml?,1
+8,Does the second fragment use a layout file called fragment_contacts.xml?,1
+9,Does the third fragment use a layout file called fragment_message.xml?,1
+10,Is the menu shown in a NavigationDrawer element?,1
+11,"Does the menu show the list of options (fragments) on the left, and a top section with the user picture?",1
+,Technical Requirements,
+12,Does the app use API version 28?,1
+13,Does the app use AndroidX?,1
+,App Usage,
+14,Did the app crash at any time during your testing?,0
+15,"Are the menu items appropriately named (Home, Contacts and Message)?",1
+16,Do the menu items take you to the correct fragments?,1
+17,Does clicking on the user icon open the device Camera?,1
+18,Is the user picture updated right after taking the picture?,1
+19,Is the user picture remembered after fully quitting the app?,1
+20,Does the Contacts fragment show the list of contacts stored on the device?,1
+21,Can you check and uncheck multiple contacts?,1
+22,Does the Message fragment show you at least two buttons?,1
+23,Does clicking on the Send Email button open an email app?,1
+24,Are all the selected contacts included in the recipients list?,1
+25,Is the Subject of the email set by the app?,1
+26,Is the Body of the email set by the app?,1
+27,Does clicking on the Send SMS/MMS button open a messaging app?,1
+28,Are all the selected contacts included in the recipients list?,1
+29,"Does the app remember the contacts check state on orientation change, or after switching to another fragment?",1
+,Code,
+30,Does the app compile?,1
+31,Does the app use SharedPreferences?,1
+32,Is there error checking?,1
+33,Are errors reported in a friendly manner?,1
+34,Is there excessive use of static methods and static variables to pass information around?,0
+35,Is the code properly commented?,1
+36,Is the code fully anonymous?,1
+37,"Are comments, variable names, etc., in English?",1
+Comments,[please put any comments you might have about the project in this field],
+Total,,35
