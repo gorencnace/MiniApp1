@@ -3,8 +3,6 @@
  *
  * It's all downhill from here!
  *
- * Based on this helpful tutorial https://www.youtube.com/watch?v=dQw4w9WgXcQ
- *
  */
 
 package si.uni_lj.fri.pbd.miniapp1;
